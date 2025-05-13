@@ -55,6 +55,24 @@ namespace geometricFigures
             if (!ok3 || mSide <= 0) { ShowError(txtSide, "lado igual"); return false; }
             if (!ok4 || mHeight <= 0) { ShowError(txtHeight, "altura"); return false; }
 
+            //Para que el trapecio isósceles sea posible, cada lado igual (mSide) debe ser mayor
+            //que la mitad de la diferencia entre las bases.
+            float baseDiff = Math.Abs(mMajorB - mMinorB);
+            float halfBaseDiff = baseDiff / 2.0f;
+
+            if (mSide <= halfBaseDiff)
+            {
+                MessageBox.Show("El lado no es suficientemente largo para formar un trapecio isósceles con las bases dadas.", "Error");
+                return false;
+            }
+
+            //Verifica que la altura no sea tan grande que rompa el triángulo isósceles lateral.
+            float maxHeight = (float)Math.Sqrt((mSide * mSide) - (halfBaseDiff * halfBaseDiff));
+            if (mHeight > maxHeight)
+            {
+                MessageBox.Show("La altura es demasiado grande para formar un trapecio isósceles con los lados dados.", "Error");
+                return false;
+            }
 
             return true;
         }

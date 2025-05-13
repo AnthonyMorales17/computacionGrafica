@@ -79,6 +79,18 @@ namespace geometricFigures
                 return false;
             }
 
+            //Para que exista el rombo con diagonales dadas, el lado debe cumplir con el Teorema de Pitágoras
+            float halfMajor = mMajorD / 2.0f;
+            float halfMinor = mMinorD / 2.0f;
+            float expectedSide = (float)Math.Sqrt(halfMajor * halfMajor + halfMinor * halfMinor);
+            //Valido que el valor de mSide este muy cerca del valor calculado (expectedSide)
+            if (Math.Abs(mSide - expectedSide) > 0.01f)
+            {
+                MessageBox.Show("El valor del lado no es coherente con las diagonales. Verifique los datos.", "Error");
+                txtSide.Focus();
+                return false;
+            }
+
             return true;
         }
 

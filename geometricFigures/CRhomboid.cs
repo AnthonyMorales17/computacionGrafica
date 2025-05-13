@@ -30,7 +30,7 @@ namespace geometricFigures
             mBase = 0.0f; mHeight = 0.0f; mSide = 0.0f; mPerimeter = 0.0f; mArea = 0.0f;
         }
 
-        // Función que lee los lados del tríangulo y verifica que sea un valor válido. 
+        // Función que lee los lados del romboide y verifica que sea un valor válido. 
         public bool ReadData(TextBox txtBase, TextBox txtHeight, TextBox txtSide)
         {
             if (string.IsNullOrWhiteSpace(txtBase.Text))

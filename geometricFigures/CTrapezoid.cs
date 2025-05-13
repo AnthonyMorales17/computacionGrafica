@@ -57,6 +57,14 @@ namespace geometricFigures
             if (!validSideA || mSideA <= 0) { ShowError(txtSideA, "lado A"); return false; }
             if (!validHeight || mHeight <= 0) { ShowError(txtHeight, "altura"); return false; }
 
+            //Validación geométrica: lados no paralelos deben alcanzar a cerrar el trapecio.
+            float baseDifference = Math.Abs(mMajorB - mMinorB);
+            if ((mSideA + mSideB) <= baseDifference)
+            {
+                MessageBox.Show("Los lados A y B no permiten formar un trapecio con las bases indicadas.", "Error");
+                return false;
+            }
+
             return true;
         }
 

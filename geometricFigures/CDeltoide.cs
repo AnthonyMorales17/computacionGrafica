@@ -29,7 +29,8 @@ namespace geometricFigures
         }
 
         // Valida que todos los campos estén completos y sean valores numéricos válidos
-        public bool ReadData(TextBox txtShortSide, TextBox txtLongSide, TextBox txtMajorDiagonal, TextBox txtMinorDiagonal)
+        public bool ReadData(TextBox txtShortSide, TextBox txtLongSide, TextBox txtMajorDiagonal,
+                             TextBox txtMinorDiagonal)
         {
             if (string.IsNullOrWhiteSpace(txtShortSide.Text) ||
                 string.IsNullOrWhiteSpace(txtLongSide.Text) ||
@@ -49,6 +50,22 @@ namespace geometricFigures
             if (!ok2 || longSide <= 0) return ShowError(txtLongSide, "Lado Largo");
             if (!ok3 || majorDiagonal <= 0) return ShowError(txtMajorDiagonal, "Diagonal Mayor");
             if (!ok4 || minorDiagonal <= 0) return ShowError(txtMinorDiagonal, "Diagonal Menor");
+
+            //Verificación de que si forma un deltoide 
+            if (Math.Abs(shortSide - longSide) < 0.001f)
+            {
+                MessageBox.Show("Los lados cortos y largos no pueden ser iguales en un deltoide.", "Error");
+                txtShortSide.Focus();
+                return false;
+            }
+
+            if (minorDiagonal >= majorDiagonal)
+            {
+                MessageBox.Show("La diagonal menor debe ser más corta que la diagonal mayor.", "Error");
+                txtMinorDiagonal.Focus();
+                return false;
+            }
+
 
             return true;
         }
@@ -76,13 +93,13 @@ namespace geometricFigures
         // Muestra los resultados del área y perímetro calculados
         public void PrintData(TextBox txtArea, TextBox txtPerimeter)
         {
-            txtArea.Text = mArea.ToString("F2");
-            txtPerimeter.Text = mPerimeter.ToString("F2");
+            txtArea.Text = mArea.ToString("0.00");
+            txtPerimeter.Text = mPerimeter.ToString("0.00");
         }
 
         // Función que inicializa los datos y controles del deltoide.
-        public void InitializeData(TextBox txtShortSide, TextBox txtLongSide, TextBox txtMajorDiagonal, TextBox txtMinorDiagonal,
-                                   TextBox txtArea, TextBox txtPerimeter)
+        public void InitializeData(TextBox txtShortSide, TextBox txtLongSide, TextBox txtMajorDiagonal, 
+                                    TextBox txtMinorDiagonal, TextBox txtArea, TextBox txtPerimeter)
         {
             txtShortSide.Text = "";
             txtLongSide.Text = "";
@@ -95,9 +112,9 @@ namespace geometricFigures
 
 
         // Cierra el formulario actual.
-        public void CloseForm(Form form)
+        public void CloseForm(Form ObjForm)
         {
-            form.Close();
+            ObjForm.Close();
         }
     }
 }

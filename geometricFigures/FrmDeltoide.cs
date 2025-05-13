@@ -48,19 +48,30 @@ namespace geometricFigures
         {
             if (ObjDeltoide.ReadData(txtShortSide, txtLongSide, txtMajorDiagonal, txtMinorDiagonal))
             {
+                // Cálculo del perímetro de un Deltoide. 
+                // Llamada a la función CalculatePerimeter
                 ObjDeltoide.CalculatePerimeter();
+                // Cálculo del área de un Deltoide. 
+                // Llamada a la función CalculateArea.
                 ObjDeltoide.CalculateArea();
+                // Impresión de datos. 
+                // Llamada a la función PrintData.
                 ObjDeltoide.PrintData(txtArea, txtPerimeter);
             }
         }
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            ObjDeltoide.InitializeData(txtShortSide, txtLongSide, txtMajorDiagonal, txtMinorDiagonal, txtArea, txtPerimeter);
+            // Inicialización de los datos y controles. 
+            // Llamada a la función InitializeData.
+            ObjDeltoide.InitializeData(txtShortSide, txtLongSide, txtMajorDiagonal,
+                                        txtMinorDiagonal, txtArea, txtPerimeter);
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            // Cierre de un formulario. 
+            // Llamada a la función CloseForm.
             ObjDeltoide.CloseForm(this);
         }
     }
